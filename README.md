@@ -1,3 +1,3 @@
-## Build your own React
+## Build your own Reacts
 
 https://pomb.us/build-your-own-react/
