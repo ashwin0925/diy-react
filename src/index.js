@@ -115,3 +115,5 @@ const element = (
 )
 const container = document.getElementById("root")
 Didact.render(element, container)
+
+// Step IV: Fibers
