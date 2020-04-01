@@ -250,21 +250,10 @@ const Didact = {
 }
 
 /** @jsx Didact.createElement */
+function App(props) {
+  return <h1>Hi {props.name}</h1>
+}
+const element = <App name="foo" />
 const container = document.getElementById("root")
+Didact.render(element, container)
 
-const updateValue = e => {
-  rerender(e.target.value)
-}
-
-const rerender = value => {
-  const element = (
-    <div>
-
-    </div>
-  )
-  Didact.render(element, container)
-}
-
-rerender("World")
-
-// Step VI: Reconciliation
