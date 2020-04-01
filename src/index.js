@@ -123,31 +123,65 @@ function reconcileChildren(wipFiber, elements) {
 
     // TODO compare oldFiber to element
 
+    const sameType =
+      oldFiber &&
+      element &&
+      element.type == oldFiber.type
+
+    if (sameType) {
+      // TODO update the node
+      newFiber = {
+        type: oldFiber.type,
+        props: element.props,
+        dom: oldFiber.dom,
+        parent: wipFiber,
+        alternate: oldFiber,
+        effectTag: "UPDATE",
+      }
+    }
+    if (element && !sameType) {
+      // TODO add this node
+      newFiber = {
+        type: element.type,
+        props: element.props,
+        dom: null,
+        parent: wipFiber,
+        alternate: null,
+        effectTag: "PLACEMENT",
+      }
+    }
+    if (oldFiber && !sameType) {
+      // TODO delete the oldFiber's node
+      oldFiber.effectTag = "DELETION"
+      deletions.push(oldFiber)
+    }
+
     if (oldFiber) {
       oldFiber = oldFiber.sibling
-      if (index === 0) {
-        wipFiber.child = newFiber
-      } else {
-        prevSibling.sibling = newFiber
-      }
-
-      prevSibling = newFiber
-      index++
     }
-  }
-
-
-  // TODO return next unit of work
-  if (fiber.child) {
-    return fiber.child
-  }
-  let nextFiber = fiber
-  while (nextFiber) {
-    if (nextFiber.sibling) {
-      return nextFiber.sibling
+    if (index === 0) {
+      wipFiber.child = newFiber
+    } else {
+      prevSibling.sibling = newFiber
     }
-    nextFiber = nextFiber.parent
+
+    prevSibling = newFiber
+    index++
   }
+}
+
+
+// TODO return next unit of work
+if (fiber.child) {
+  return fiber.child
+}
+let nextFiber = fiber
+while (nextFiber) {
+  if (nextFiber.sibling) {
+    return nextFiber.sibling
+  }
+  nextFiber = nextFiber.parent
+}
 }
 
 // Step VI: Reconciliation
