@@ -257,3 +257,4 @@ const element = <App name="foo" />
 const container = document.getElementById("root")
 Didact.render(element, container)
 
+// Step VII: Function Components
