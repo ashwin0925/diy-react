@@ -110,3 +110,5 @@ function performUnitOfWork(fiber) {
     nextFiber = nextFiber.parent
   }
 }
+
+// Step V: Render and Commit Phases
