@@ -119,3 +119,5 @@ function performUnitOfWork(fiber) {
     nextFiber = nextFiber.parent
   }
 }
+
+// Step VI: Reconciliation
